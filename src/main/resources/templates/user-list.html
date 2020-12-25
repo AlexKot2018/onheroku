@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Телефонный справочник</title>
+</head>
+<body>
+<form action="#" th:action="@{/user-create}" th:object="${user}" method="post">
+    <input type="submit" value="Добавить строку">
+</form>
+<div th:switch="${users}">
+    <h2 th:case="null">No users found!</h2>
+    <div th:case="*">
+        <h2>Список людей</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Номер телефона</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.surname}"></td>
+                <td th:text="${user.nameuser}"></td>
+                <td th:text="${user.phoneuser}"></td>
+                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Удалить</a></td>
+                <td><a th:href="@{user-update/{id}(id=${user.id})}">Заполнить</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
